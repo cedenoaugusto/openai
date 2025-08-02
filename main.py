@@ -10,41 +10,7 @@ app = FastAPI()
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-HTML_PAGE = """
-<!DOCTYPE html>
-<html>
-<head>
-    <title>OpenAI Local</title>
-</head>
-<body>
-    <h1>Prueba OpenAI local</h1>
-    <textarea id="inputText" rows="5" cols="60" placeholder="Escribe tu consulta aquí"></textarea><br>
-    <button onclick="sendRequest()">Enviar</button>
-    <h3>Respuesta:</h3>
-    <pre id="response"></pre>
-
-<script>
-async function sendRequest() {
-    const input = document.getElementById('inputText').value;
-    const responseElem = document.getElementById('response');
-    responseElem.textContent = "Cargando...";
-
-    const res = await fetch('/api/chat', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({prompt: input})
-    });
-    const data = await res.json();
-    if (data.error) {
-        responseElem.textContent = "Error: " + data.error;
-    } else {
-        responseElem.textContent = data.response;
-    }
-}
-</script>
-</body>
-</html>
-"""
+from template import HTML_PAGE
 
 @app.get("/", response_class=HTMLResponse)
 async def home():

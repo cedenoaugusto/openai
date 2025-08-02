@@ -1,3 +1,5 @@
+# https://platform.openai.com/settings/organization/billing/overview
+
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, JSONResponse
 import openai
@@ -6,7 +8,7 @@ import uvicorn
 
 app = FastAPI()
 
-openai.api_key = os.getenv("OPENAI_API_KEY")  # O pon tu clave aquí
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 HTML_PAGE = """
 <!DOCTYPE html>
